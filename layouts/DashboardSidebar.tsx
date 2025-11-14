@@ -62,12 +62,12 @@ export function DashboardSidebar({
             const Icon = link.icon;
             return (
               <SidebarMenuItem key={link.id} className="py-1">
-                <SidebarMenuButton className="px-3 text-white cursor-pointer text-sm font-normal hover:rounded hover:bg-orange-200 hover:text-orange-600 duration-200 transition-all">
+                <SidebarMenuButton className="px-3 text-white cursor-pointer text-sm font-normal hover:rounded hover:bg-orange-100 hover:text-orange-600 duration-200 transition-all">
                   <Link
                     href={link.href}
                     className="inline-flex gap-2 items-center"
                   >
-                    <span className="text-white">
+                    <span className="">
                       <Icon size={18} />
                     </span>
                     {link.label}

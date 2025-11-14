@@ -77,7 +77,7 @@ export function DataTable<T extends object>({
   return (
     <div className="w-full">
       <Table>
-        <TableHeader className="bg-gray-200 text-xs">
+        <TableHeader className="bg-gray-200 dark:bg-neutral-800 text-xs">
           {table.getHeaderGroups().map((group) => (
             <TableRow key={group.id}>
               {group.headers.map((header) => {

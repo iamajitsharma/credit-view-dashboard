@@ -1,4 +1,7 @@
 "use client";
+//import node modules libraries
+import { useTheme } from "next-themes";
+
 //import custom components
 import ApexCharts from "@/components/charts/ApexChart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AnalyticsChartProps } from "@/types";
 
 const AnalyticsBarChart = ({ chartData, categories }: AnalyticsChartProps) => {
+  const { resolvedTheme } = useTheme();
+
+  const labelColor = resolvedTheme === "dark" ? "#fff" : "#000";
+
   const options = {
     chart: {
       type: "bar",
@@ -20,13 +27,14 @@ const AnalyticsBarChart = ({ chartData, categories }: AnalyticsChartProps) => {
       categories: categories,
       labels: {
         rotate: -45,
-        style: { fontSize: "12px" },
+        style: { fontSize: "12px", colors: labelColor },
       },
     },
 
     yaxis: {
       labels: {
         formatter: (value: number) => value.toLocaleString(),
+        style: { colors: labelColor },
       },
     },
 
@@ -39,8 +47,7 @@ const AnalyticsBarChart = ({ chartData, categories }: AnalyticsChartProps) => {
     },
 
     dataLabels: {
-      enabled: true,
-      formatter: (val: number) => val.toLocaleString(),
+      enabled: false,
     },
 
     tooltip: {
@@ -53,7 +60,7 @@ const AnalyticsBarChart = ({ chartData, categories }: AnalyticsChartProps) => {
       position: "top",
     },
 
-    colors: ["#10b981"], // Tailwind emerald-500
+    colors: ["#10b981"],
   };
 
   return (
@@ -66,7 +73,7 @@ const AnalyticsBarChart = ({ chartData, categories }: AnalyticsChartProps) => {
           options={options}
           series={chartData}
           type={"bar"}
-          height={380}
+          height={284}
           width={"100%"}
         />
       </CardContent>

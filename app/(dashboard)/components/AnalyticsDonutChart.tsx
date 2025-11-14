@@ -61,7 +61,7 @@ const AnalyticsDonutChart = ({
       <CardContent className="flex items-center justify-center">
         <ApexCharts
           options={options}
-          series={[75, 25]}
+          series={chartData}
           type={"donut"}
           height={380}
           width={380}

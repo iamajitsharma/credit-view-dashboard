@@ -10,7 +10,7 @@ export type BorrowerType = {
   amountDue: number;
   lastPayment: string;
   dueDate: string;
-  status: string;
+  status: "Paid" | "Overdue" | "Settled" | "Closed" | "Written Off" | "Pending";
   createdAt: string;
 };
 

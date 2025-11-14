@@ -12,7 +12,7 @@ const DashboardStatsGrid: React.FC<DashboardStatsProps> = ({ data }) => {
   console.log(data, "From Dash Grid");
   return (
     <section>
-      <div className="grid grid-cols-5 gap-x-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {data.map((item, index) => (
           <StatsCard key={item.title} data={item} index={index} />
         ))}

@@ -1,29 +1,21 @@
 "use client";
-//import node modules libraries
+//import node module libraries
 import { Mail, MapPin, Phone } from "lucide-react";
 import moment from "moment";
 
 //import custom components
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 //import custom hooks
 import { useViewBorrower } from "@/hooks/useBorrowers";
 
-//import helper utility function
+//import helper utility functions
 import { getInitials } from "@/lib/utils";
 
 const ViewBorrowerModal = () => {
@@ -45,86 +37,59 @@ const ViewBorrowerModal = () => {
     status,
   } = selectedBorrower;
 
-  const tableData = [
-    {
-      loanId,
-      amountDue,
-      lastPayment,
-      dueDate,
-      status,
-    },
-  ];
-
   return (
     <Dialog open={isViewBorrowerOpen} onOpenChange={handleViewBorrowerClose}>
-      <DialogContent>
-        <DialogHeader className="border-b pb-3">
-          <DialogTitle className="font-medium text-base">
+      <DialogContent className="max-w-sm md:max-w-xl w-full h-4/5 overflow-y-auto">
+        <DialogHeader className="border-b">
+          <DialogTitle className="font-semibold text-lg">
             Borrower Details
           </DialogTitle>
         </DialogHeader>
-        <div>
-          <div className="flex items-start gap-4">
-            <Avatar className="w-16 h-16">
-              <AvatarImage src={avatar} alt={customerName} sizes="" />
-              <AvatarFallback>{getInitials(customerName)}</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <h4>{customerName}</h4>
-              <div className="flex flex-col gap-2 mt-2">
-                <div className="flex items-center gap-3">
-                  <p className="inline-flex items-center gap-2 text-neutral-500 text-sm">
-                    <span>
-                      <Phone size={18} strokeWidth={1.5} />
-                    </span>
-                    {phoneNumber}
-                  </p>
-                  <p className="inline-flex items-center gap-2 text-neutral-500 text-sm">
-                    <span>
-                      <Mail size={18} strokeWidth={1.5} />
-                    </span>
-                    {email}
-                  </p>
-                </div>
-                <p className="inline-flex items-center gap-2 text-neutral-500 text-sm">
-                  <span>
-                    <MapPin size={18} strokeWidth={1.5} />
-                  </span>
-                  {address}
+
+        {/* USER INFO */}
+        <div className="flex flex-col md:flex-row items-start gap-4 mt-4">
+          <Avatar className="w-20 h-20">
+            <AvatarImage src={avatar} alt={customerName} />
+            <AvatarFallback className="text-lg font-medium">
+              {getInitials(customerName)}
+            </AvatarFallback>
+          </Avatar>
+
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold">{customerName}</h3>
+
+            <div className="flex flex-col gap-2 mt-3 text-sm text-muted-foreground">
+              <div className="flex flex-col gap-2">
+                <p className="inline-flex items-center gap-2">
+                  <Phone size={18} strokeWidth={1.5} /> {phoneNumber}
+                </p>
+                <p className="inline-flex items-center gap-2">
+                  <Mail size={18} strokeWidth={1.5} /> {email}
+                </p>
+                <p className="inline-flex items-center gap-2">
+                  <MapPin size={18} strokeWidth={1.5} /> {address}
                 </p>
               </div>
             </div>
           </div>
-          {/* Loan Information */}
-          <div className="mt-4 ">
-            <Table border={1} className="border overflow-hidden">
-              <TableHeader className="bg-neutral-100 text-xs border">
-                <TableRow>
-                  <TableHead className="w-[100px]">Loan ID</TableHead>
-                  <TableHead className="w-[100px]">Amount Due</TableHead>
-                  <TableHead>Due Date</TableHead>
-                  <TableHead>Last Payment</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody className="border">
-                {tableData.map((item) => (
-                  <TableRow key={item.loanId} className="border text-center">
-                    <TableCell className="font-medium border">
-                      {item.loanId}
-                    </TableCell>
-                    <TableCell>{item.amountDue}</TableCell>
-                    <TableCell className="border">
-                      {moment(item.dueDate).format("Do MMM YYYY")}
-                    </TableCell>
-                    <TableCell>
-                      {moment(item.lastPayment).format("Do MMM YYYY")}
-                    </TableCell>
-                    <TableCell className="border">{item.status}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+        </div>
+
+        {/* LOAN INFORMATION */}
+        <div className="mt-6">
+          <h4 className="font-semibold text-base mb-3">Loan Information</h4>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <InfoCard label="Loan ID" value={loanId} />
+            <InfoCard label="Amount Due" value={amountDue} />
+            <InfoCard
+              label="Due Date"
+              value={moment(dueDate).format("Do MMM YYYY")}
+            />
+            <InfoCard
+              label="Last Payment"
+              value={moment(lastPayment).format("Do MMM YYYY")}
+            />
+            <InfoCard label="Status" value={status} />
           </div>
         </div>
       </DialogContent>
@@ -133,3 +98,14 @@ const ViewBorrowerModal = () => {
 };
 
 export default ViewBorrowerModal;
+
+const InfoCard = ({ label, value }: { label: string; value: any }) => {
+  return (
+    <div className="border rounded-lg p-3 bg-card shadow-sm hover:shadow-md transition-all">
+      <p className="text-xs text-muted-foreground uppercase tracking-wide">
+        {label}
+      </p>
+      <p className="font-medium text-sm mt-1 break-words">{value}</p>
+    </div>
+  );
+};

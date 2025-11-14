@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useSidebar } from "@/components/ui/sidebar";
 import { UserMenu } from "./UserMenu";
+import { ModeToggle } from "@/layouts/ModeToggle";
 
 export default function DashboardHeader() {
   const { open } = useSidebar();
@@ -22,7 +23,8 @@ export default function DashboardHeader() {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-6">
+          <ModeToggle />
           <UserMenu />
         </div>
       </div>

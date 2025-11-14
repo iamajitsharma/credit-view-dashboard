@@ -27,13 +27,13 @@ const StatsCard: React.FC<StatsCardProps> = ({ data, index }) => {
   const IconComponent = icons[index] || icons[0];
 
   return (
-    <div className="border p-4 rounded-lg shadow-sm">
+    <div className="border p-4 rounded-lg shadow-sm bg-white dark:bg-neutral-900">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="text-sm font-medium text-neutral-600">
+        <div className="text-xs md:text-sm font-medium text-neutral-600 dark:text-neutral-400">
           <p>{title}</p>
         </div>
-        <div className="w-7 h-7 bg-orange-300 text-white flex items-center justify-center rounded">
+        <div className="flex-flex-shrink-0 w-7 aspect-square bg-orange-300 text-white flex items-center justify-center rounded">
           <span>
             <IconComponent size={18} />
           </span>
@@ -41,7 +41,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ data, index }) => {
       </div>
       {/* Content */}
       <div className="py-3">
-        <div className="text-2xl font-bold">
+        <div className="text-base md:text-2xl font-bold">
           <h2>{formattedValue}</h2>
         </div>
       </div>

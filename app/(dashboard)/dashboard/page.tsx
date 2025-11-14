@@ -23,9 +23,9 @@ const Borrowers = async () => {
     <Fragment>
       <section>
         <PageHeader
-          title="Borrowers"
+          title="Dashboard"
           actionBtn
-          actionLabel="Add New"
+          actionLabel="Add New Borrower"
           actionBtnVariant={"default"}
           actionBtnIcon={<Plus size={20} />}
         />

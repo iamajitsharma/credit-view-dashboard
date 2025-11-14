@@ -21,8 +21,8 @@ const Analytics = async () => {
   return (
     <section>
       <DashboardStatsGrid data={data.statItems} />
-      <div className="flex items-start gap-8 mt-8">
-        <div className="w-8/12">
+      <div className="flex flex-col lg:flex-row items-start gap-8 mt-8">
+        <div className="w-full lg:w-8/12">
           {data.chartData.bar && (
             <AnalyticsBarChart
               categories={data.chartData.bar?.categories}
@@ -30,7 +30,7 @@ const Analytics = async () => {
             />
           )}
         </div>
-        <div className="w-4/12">
+        <div className="w-full lg:w-4/12">
           {data.chartData.donut && (
             <AnalyticsDonutChart
               chartData={data.chartData.donut?.series}

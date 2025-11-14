@@ -83,7 +83,37 @@ export const BorrowerTableColumns: ColumnDef<BorrowerType>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      return <Badge>{row.original.status}</Badge>;
+      const status = row.original.status;
+      const badgeColor =
+        status === "Paid"
+          ? `bg-green-100`
+          : status === "Overdue"
+          ? "bg-rose-100"
+          : status === "Pending"
+          ? "bg-amber-100"
+          : status === "Written Off"
+          ? "bg-rose-100"
+          : status === "Settled"
+          ? "bg-sky-100"
+          : "bg-sky-100";
+
+      const badgeTextColor =
+        status === "Paid"
+          ? `text-green-600`
+          : status === "Overdue"
+          ? "text-rose-600"
+          : status === "Pending"
+          ? "text-amber-600"
+          : status === "Written Off"
+          ? "text-rose-500"
+          : status === "Settled"
+          ? "text-sky-500"
+          : "text-sky-600";
+      return (
+        <Badge className={`${badgeColor} ${badgeTextColor} rounded`}>
+          {row.original.status}
+        </Badge>
+      );
     },
   },
   {

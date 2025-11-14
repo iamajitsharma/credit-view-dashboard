@@ -107,16 +107,20 @@ export async function getAnalyticData(): Promise<AnalyticType> {
     );
 
     const stats: StatItems[] = [
-      { title: "Total Loan Amount", value: totalLoanAmount, type: "currency" },
-      { title: "Total Amount Due", value: totalAmountDue, type: "currency" },
-      { title: "Total Recovered", value: totalRecovered, type: "currency" },
-      { title: "Total Borrowers", value: allBorrowers.length, type: "number" },
+      { title: "Loan Amount", value: totalLoanAmount, type: "currency" },
+      { title: "Amount Due", value: totalAmountDue, type: "currency" },
+      { title: "Recovered", value: totalRecovered, type: "currency" },
+      // { title: "Total Borrowers", value: allBorrowers.length, type: "number" },
       {
-        title: "Total Overdue Percent",
+        title: "Overdue Percent",
         value: overduePercentage,
         type: "percent",
       },
     ];
+
+    const totalRecoveredPercent = Math.round(
+      (totalRecovered / totalLoanAmount) * 100
+    );
 
     // Bar Chart
     const barSeries = [
@@ -128,7 +132,7 @@ export async function getAnalyticData(): Promise<AnalyticType> {
     const barCategories = stats.map((item) => item.title);
 
     // Donut Chart
-    const donutSeries = [overduePercentage, totalRecovered];
+    const donutSeries = [overduePercentage, totalRecoveredPercent];
 
     return {
       statItems: stats,

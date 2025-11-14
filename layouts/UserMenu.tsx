@@ -1,6 +1,7 @@
 //import node modules libraries
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
+import { Fragment } from "react";
 
 //import custom components
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -43,12 +44,12 @@ export function UserMenu() {
             );
           } else {
             return (
-              <>
+              <Fragment key={item.id}>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem key={item.id}>
                   <Link href={item.link}>{item.title}</Link>
                 </DropdownMenuItem>
-              </>
+              </Fragment>
             );
           }
         })}
