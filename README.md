@@ -90,7 +90,7 @@ Shows:
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/credit-view-dashboard.git
+git clone https://github.com/iamajitsharma/credit-view-dashboard.git
 cd credit-view-dashboard
 ```
 
